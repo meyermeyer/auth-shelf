@@ -7,11 +7,11 @@ function* watcherSaga(){
 }
 function* deleteItemSaga(action){
     try {
-        let url = `'/api/shelf/${action.payload.id}`
+        let url = `/api/shelf/${action.payload.id}`
         console.log(action.payload);
         
-        console.log('in deleteItemSaga');
-        axios.delete(url, action.payload.user_id)
+        console.log('in deleteItemSaga', action.payload.id);
+        axios.delete(url)
     }
     catch (err){
         console.log('error in deleteItemSaga', err);

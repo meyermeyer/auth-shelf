@@ -56,9 +56,11 @@ router.delete('/:id', (req, res) => {
     console.log('in DELETE', req.body.user_id);
     console.log('req.user.id', req.user.id);
     
-    if(req.user.id==req.body.user_id) {
-        let query = 'DELETE FROM "item" WHERE "id"=$1'
-        pool.query(query,[req.params.id])
+    if(isAuthenticated()) {
+        console.log(req.params.id);
+        
+        let query = `DELETE FROM "item" WHERE "id"=$1 AND "user_id"=$2`
+        pool.query(query,[req.params.id, req.user.id])
         .then( (response) => {
             console.log('in DELETE /api/shield', response);
             res.sendStatus(200)
