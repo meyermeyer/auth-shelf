@@ -6,7 +6,24 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
 router.get('/', (req, res) => {
-    res.sendStatus(200); // For testing only, can be removed
+    if(req.isAuthenticated()){
+        let query= `SELECT * FROM "item";`;
+        pool.query(query)
+        .then((results) => {
+            res.send(results.rows)
+            console.log('in glitchy get with result: ', results.rows)
+            })
+        .catch( (error) => {
+            console.log('error in GET: ', error);
+            res.sendStatus(500);
+        })
+    }
+    else {
+       console.log('GET /api/shelf');
+       res.sendStatus(403)
+        
+    }
+  //  res.sendStatus(200); // For testing only, can be removed
 });
 
 
