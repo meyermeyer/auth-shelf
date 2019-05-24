@@ -27,7 +27,7 @@ class ShelfInputForm extends Component {
     
     handleClick = () => {
         console.log('in handleClick', this.state.description, this.state.image_url);
-       //this.props.dispatch({ type: 'SEND_ITEM', payload: this.state})
+       this.props.dispatch({ type: 'SEND_ITEM', payload: this.state})
     }
     
     
