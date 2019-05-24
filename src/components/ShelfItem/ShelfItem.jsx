@@ -6,9 +6,9 @@ class ShelfItem extends Component {
         console.log(this.props.reduxState)
         return(
             <ul>
-                {this.props.reduxState.storeItemReducer.map((item) => {
+                {this.props.reduxState.storeItemReducer.map((item, i) => {
                     return (
-                        <li>
+                        <li key={i}>
                             {item.description}
                             <img src={item.image_url}/>
                         </li>
