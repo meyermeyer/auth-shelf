@@ -26,6 +26,9 @@ router.get('/', (req, res) => {
   //  res.sendStatus(200); // For testing only, can be removed
 });
 
+/**
+ * Add an item for the logged in user to the shelf
+ */
 router.post('/', (req,res)=>{
     if(req.isAuthenticated()){
         let query = `INSERT INTO "item" ("description", "image_url", "user_id")
@@ -44,20 +47,31 @@ router.post('/', (req,res)=>{
         console.log('POST /api/shelf forbidden');
         res.sendStatus(403)
     }
-    
-    
 })
-/**
- * Add an item for the logged in user to the shelf
- */
-
-
 
 /**
  * Delete an item if it's something the logged in user added
  */
 router.delete('/:id', (req, res) => {
-
+    console.log('in DELETE', req.body.user_id);
+    console.log('req.user.id', req.user.id);
+    
+    if(req.user.id==req.body.user_id) {
+        let query = 'DELETE FROM "item" WHERE "id"=$1'
+        pool.query(query,[req.params.id])
+        .then( (response) => {
+            console.log('in DELETE /api/shield', response);
+            res.sendStatus(200)
+        })
+        .catch(error => {
+            console.log('error in DELETE /api/shield', error);
+            res.sendStatus(500)
+        })
+    }
+    else {
+        console.log('DELETE /api/shelf forbidden');
+        res.sendStatus(403)
+    }
 });
 
 
