@@ -1,8 +1,11 @@
 const storeItemReducer = (state = [], action) => {
     switch (action.type){
         case 'SHOW_ITEMS':
-        return action.payload;
+            console.log('in storeItemReducer', action.payload);
+            return action.payload;
         default:
-        return state;
+            return state;
     }
 }
+
+export default storeItemReducer;

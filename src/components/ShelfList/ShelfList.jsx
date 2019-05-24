@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import ShelfItem from '../ShelfItem/ShelfItem'
+
+
 
 class ShelfList extends Component {
+    componentDidMount(){
+        this.props.dispatch({type:'FETCH_ITEMS'})
+    }
     render(){
         return(
-            <p>TEST GANG</p>
+            // {this.props.reduxState.storeItemReducer.map((item)=>{
+            //     return(
+
+            //     )
+            // })}
+                <ShelfItem />
+            
         )
     }
 }
 
 
-export default ShelfList;
+export default connect()(ShelfList);
