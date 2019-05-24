@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ShelfItem from '../ShelfItem/ShelfItem'
+import ShelfInputForm from '../ShelfInputForm/ShelfInputForm.jsx';
 
 
 
@@ -15,8 +16,10 @@ class ShelfList extends Component {
 
             //     )
             // })}
+            <>
+                <ShelfInputForm />
                 <ShelfItem />
-            
+            </>
         )
     }
 }
